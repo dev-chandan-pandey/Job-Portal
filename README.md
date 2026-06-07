@@ -1,86 +1,82 @@
-# Job Portal - Microservices Architecture
+# Job Portal - Full Stack Application
 
-A modern, scalable job portal built with microservices architecture. Discover jobs, apply for positions, and manage your career all in one place.
+A modern job portal application built with React and Node.js. Browse jobs, apply for positions, and manage your career seamlessly.
 
 **Live Demo:** [https://job-portal-tau-sepia.vercel.app](https://job-portal-tau-sepia.vercel.app)
 
 ## 🏗️ Architecture Overview
 
-This project follows a microservices architecture with a React frontend and Node.js backend services:
-
 ```
 ┌─────────────────────────────────────────────────────┐
-│         Frontend (React + TypeScript + Vite)        │
-│        - Job Browsing & Filtering                   │
-│        - User Profiles & Applications                │
-│        - Authentication (Google OAuth)               │
+│    Frontend (React 19 + TypeScript + Vite)          │
+│    - Job Browsing & Filtering                       │
+│    - User Profiles & Applications                   │
+│    - Google OAuth Authentication                    │
+└────────────────────┬────────────────────────────────┘
+                     │ (Axios HTTP Requests)
+┌────────────────────▼────────────────────────────────┐
+│    Backend (Node.js + Express + TypeScript)        │
+│    - User Management & Authentication               │
+│    - Job Listings & Applications                    │
+│    - Payment Processing (Razorpay)                  │
 └────────────────────┬────────────────────────────────┘
                      │
 ┌────────────────────▼────────────────────────────────┐
-│        API Gateway / Backend Services               │
-│        - User Management                             │
-│        - Job Listings                                │
-│        - Application Processing                      │
-│        - Payment Integration (Razorpay)              │
-└────────────────────┬────────────────────────────────┘
-                     │
-┌────────────────────▼────────────────────────────────┐
-│              Data & Message Layer                   │
-│        - PostgreSQL (Database)                       │
-│        - Kafka (Event Streaming)                     │
+│        MongoDB Database                             │
+│        - User Data                                  │
+│        - Job Listings                               │
+│        - Applications & Transactions                │
 └─────────────────────────────────────────────────────┘
 ```
 
 ## 🚀 Tech Stack
 
 ### Frontend
-- **React 19** - UI library
-- **TypeScript** - Type safety
-- **Vite** - Fast build tool with HMR
+- **React 19** - UI library with latest features
+- **TypeScript** - Type safety and better DX
+- **Vite** - Lightning fast build tool with HMR
 - **Tailwind CSS** - Utility-first CSS framework
 - **React Router v7** - Client-side routing
-- **Axios** - HTTP client
-- **Google OAuth** - Authentication
-- **React Hot Toast** - Notifications
-- **jsPDF** - PDF generation
-- **Lucide React** - Icon library
+- **Axios** - HTTP client for API calls
+- **Google OAuth** - Secure authentication via Google
+- **React Hot Toast** - Toast notifications
+- **jsPDF** - PDF generation for resumes
+- **Lucide React** - Beautiful icon library
 
 ### Backend
-- **Node.js** - Runtime environment
-- **Express.js** - Web framework
-- **TypeScript** - Type safety
-- **MongoDB/Mongoose** - Database ORM
-- **JWT** - Authentication
-- **Razorpay** - Payment processing
-- **Google APIs** - Integration services
-- **Axios** - HTTP client
-- **CORS** - Cross-origin requests
-- **dotenv** - Environment configuration
+- **Node.js** - JavaScript runtime
+- **Express.js v5** - Web application framework
+- **TypeScript** - Type-safe backend development
+- **Mongoose** - MongoDB object modeling
+- **JWT** - JSON Web Token authentication
+- **Razorpay** - Payment gateway integration
+- **Google APIs** - Google services integration (@google/genai, googleapis)
+- **Axios** - HTTP client for external APIs
+- **CORS** - Cross-origin request handling
+- **dotenv** - Environment variable management
 
-### Infrastructure
-- **PostgreSQL** - Primary database
-- **Kafka** - Event streaming & message queue
-- **Vercel** - Frontend hosting
+### Database
+- **MongoDB** - NoSQL database for flexible data storage
 
 ## 📋 Features
 
-- 🔐 **User Authentication** - Google OAuth & JWT-based auth
+- 🔐 **Google OAuth Authentication** - One-click login with Google
 - 💼 **Job Listings** - Browse and filter job opportunities
-- 📝 **Application Management** - Track job applications
-- 👤 **User Profiles** - Create and manage profiles
-- 💳 **Payment Integration** - Razorpay for secure payments
-- 🔔 **Real-time Notifications** - Toast notifications
-- 📄 **Resume/CV** - Generate PDF resumes
-- 🎯 **Advanced Filtering** - Filter jobs by role, salary, location
-- 📱 **Responsive Design** - Works on all devices
+- 📝 **Job Applications** - Apply for jobs and track applications
+- 👤 **User Profiles** - Create and manage user profiles
+- 💳 **Secure Payments** - Razorpay integration for transactions
+- 🔔 **Toast Notifications** - Real-time user feedback
+- 📄 **PDF Resume Generation** - Generate and download resumes as PDF
+- 🎯 **Advanced Filtering** - Filter jobs by role, salary, location, etc.
+- 📱 **Responsive Design** - Works seamlessly on all devices
+- ⚡ **Fast Development** - Vite with HMR for instant feedback
 
 ## 🛠️ Setup & Installation
 
 ### Prerequisites
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
-- PostgreSQL
-- Kafka (for production)
+- MongoDB (local or cloud)
 - Git
 
 ### Clone Repository
@@ -110,7 +106,7 @@ npm run preview
 npm run lint
 ```
 
-The frontend will be available at `http://localhost:5173`
+Frontend runs on `http://localhost:5173`
 
 ### Backend Setup
 
@@ -130,25 +126,25 @@ npm run dev
 npm start
 ```
 
-The backend will be available at `http://localhost:3000` (or configured port)
+Backend runs on `http://localhost:3000` (or configured PORT)
 
 ## 🔧 Environment Variables
 
-### Frontend (.env)
+### Frontend (.env.local)
 ```env
 VITE_API_URL=http://localhost:3000
-VITE_GOOGLE_CLIENT_ID=your_google_client_id
+VITE_GOOGLE_CLIENT_ID=your_google_client_id_here
 ```
 
 ### Backend (.env)
 ```env
 PORT=3000
 NODE_ENV=development
-MONGODB_URI=your_mongodb_uri
-JWT_SECRET=your_jwt_secret
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
 GOOGLE_CLIENT_ID=your_google_client_id
-RAZORPAY_KEY_ID=your_razorpay_key
-RAZORPAY_KEY_SECRET=your_razorpay_secret
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_secret_key
 CORS_ORIGIN=http://localhost:5173
 ```
 
@@ -158,29 +154,30 @@ CORS_ORIGIN=http://localhost:5173
 Job-Portal/
 ├── frontend/                  # React frontend application
 │   ├── src/
-│   │   ├── components/       # Reusable components
+│   │   ├── components/       # Reusable React components
 │   │   ├── pages/            # Page components
 │   │   ├── hooks/            # Custom React hooks
-│   │   ├── services/         # API services
-│   │   ├── types/            # TypeScript types
-│   │   ├── styles/           # Global styles
-│   │   └── App.tsx           # Root component
+│   │   ├── services/         # API service calls
+│   │   ├── types/            # TypeScript type definitions
+│   │   ├── App.tsx           # Root component
+│   │   └── main.tsx          # Entry point
 │   ├── public/               # Static assets
 │   ├── package.json
 │   ├── tsconfig.json
 │   ├── vite.config.ts
-│   └── tailwind.config.ts
+│   ├── tailwind.config.ts
+│   └── eslint.config.js
 │
-├── backend/                   # Node.js backend services
+├── backend/                   # Node.js/Express backend
 │   ├── src/
 │   │   ├── controllers/      # Request handlers
-│   │   ├── models/           # Database models
-│   │   ├── routes/           # API routes
-│   │   ├── middleware/       # Custom middleware
+│   │   ├── models/           # Mongoose database models
+│   │   ├── routes/           # API route definitions
+│   │   ├── middleware/       # Express middleware
 │   │   ├── services/         # Business logic
-│   │   ├── types/            # TypeScript types
-│   │   └── index.ts          # Entry point
-│   ├── dist/                 # Compiled output
+│   │   ├── types/            # TypeScript interfaces
+│   │   └── index.ts          # Application entry point
+│   ├── dist/                 # Compiled JavaScript output
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── .env
@@ -191,53 +188,53 @@ Job-Portal/
 ## 🔄 API Endpoints
 
 ### Authentication
-- `POST /api/auth/login` - User login
 - `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login with Google OAuth
 - `POST /api/auth/logout` - User logout
-- `GET /api/auth/profile` - Get user profile
+- `GET /api/auth/profile` - Get current user profile
 
 ### Jobs
-- `GET /api/jobs` - Get all jobs
-- `GET /api/jobs/:id` - Get job details
+- `GET /api/jobs` - Get all jobs with filtering
+- `GET /api/jobs/:id` - Get specific job details
 - `POST /api/jobs` - Create new job (admin)
-- `PUT /api/jobs/:id` - Update job (admin)
+- `PUT /api/jobs/:id` - Update job details (admin)
 - `DELETE /api/jobs/:id` - Delete job (admin)
 
 ### Applications
-- `GET /api/applications` - Get user applications
+- `GET /api/applications` - Get user's applications
 - `POST /api/applications` - Submit job application
 - `GET /api/applications/:id` - Get application details
 - `PUT /api/applications/:id` - Update application status
 
 ### Payments
-- `POST /api/payments/create-order` - Create payment order
-- `POST /api/payments/verify` - Verify payment
+- `POST /api/payments/create-order` - Create Razorpay order
+- `POST /api/payments/verify` - Verify payment completion
 
-## 🧪 Testing
+## 🧪 Code Quality
 
 ```bash
 # Frontend linting
 cd frontend
 npm run lint
 
-# Backend would include tests (if configured)
+# Backend linting (if configured)
 cd backend
-npm test
+npm run lint
 ```
 
 ## 🚀 Deployment
 
 ### Frontend (Vercel)
-1. Connect your GitHub repository to Vercel
-2. Set environment variables in Vercel dashboard
-3. Deploy with `npm run build`
+1. Connect GitHub repository to Vercel
+2. Configure environment variables in Vercel dashboard
+3. Automatic deployment on push to main branch
 
-### Backend
-Deployment options:
-- **Heroku** - Easy Node.js deployment
-- **AWS EC2** - Full control
-- **Railway** - Modern PaaS
-- **Render** - Simple deployments
+### Backend Deployment Options
+- **Railway.app** - Easy Node.js hosting
+- **Heroku** - PaaS platform
+- **AWS EC2** - Full control server
+- **Render** - Modern deployment platform
+- **DigitalOcean** - VPS hosting
 
 ## 📝 Git Workflow
 
@@ -247,70 +244,62 @@ git checkout -b feature/your-feature-name
 
 # Make changes and commit
 git add .
-git commit -m "Add: brief description of changes"
+git commit -m "feat: description of changes"
 
 # Push to repository
 git push origin feature/your-feature-name
 
-# Create Pull Request on GitHub
+# Create Pull Request
 ```
 
 ## 🐛 Troubleshooting
 
 ### CORS Errors
-- Ensure `CORS_ORIGIN` environment variable is set correctly in backend
-- Check that frontend URL matches backend CORS configuration
+- Verify `CORS_ORIGIN` in backend .env matches frontend URL
+- Check Express CORS middleware configuration
 
 ### MongoDB Connection Issues
-- Verify MongoDB URI is correct
-- Ensure IP is whitelisted in MongoDB Atlas (if using cloud)
+- Verify `MONGODB_URI` is correct in .env
+- Ensure IP address is whitelisted (if using MongoDB Atlas)
+- Check MongoDB service is running
 
-### Kafka Connection Issues
-- Ensure Kafka broker is running
-- Check Kafka configuration in backend
+### Google OAuth Issues
+- Verify `VITE_GOOGLE_CLIENT_ID` in frontend .env
+- Ensure OAuth credentials are created in Google Cloud Console
+- Check redirect URIs are configured correctly
 
 ### Port Already in Use
 ```bash
-# Find process using port
-lsof -i :3000  # Backend
-lsof -i :5173  # Frontend
+# Find process on port
+lsof -i :3000    # Backend
+lsof -i :5173    # Frontend
 
 # Kill process
 kill -9 <PID>
 ```
 
-## 📚 Documentation
-
-- [Frontend README](./frontend/README.md)
-- [Backend Setup Guide](./backend)
-
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'feat: Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
 ## 📄 License
 
-This project is licensed under the ISC License - see the LICENSE file for details.
+This project is licensed under the ISC License.
 
 ## 👨‍💼 Author
 
 **Chandan Pandey**
 - GitHub: [@dev-chandan-pandey](https://github.com/dev-chandan-pandey)
-
-## 🙏 Acknowledgments
-
-- React and Vite communities
-- Express.js and Node.js ecosystems
-- All contributors and testers
+- Portfolio: [Visit](https://job-portal-tau-sepia.vercel.app)
 
 ## 📞 Support
 
-For support, please open an issue on the GitHub repository.
+For issues and questions, open an issue on the [GitHub repository](https://github.com/dev-chandan-pandey/Job-Portal/issues).
 
 ---
 
-**Built with ❤️ using modern web technologies**
+**Built with ❤️ using React, Node.js, and TypeScript**
