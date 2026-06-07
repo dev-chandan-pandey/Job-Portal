@@ -5,12 +5,12 @@ import App from "./App.tsx";
 import { AppProvider } from "./context/AppContext.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-export const server = "https://ai-career-backend-q7xn.onrender.com";
+export const server = "https://job-portal-0ztw.onrender.com";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AppProvider>
-      <GoogleOAuthProvider clientId="725062504668-2dqnaksme7j73j26j86jonq1762mih4q.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId="114439011210-26ehi4poejcl8alnamr0hhoppcqo103h.apps.googleusercontent.com">
         <App />
       </GoogleOAuthProvider>
     </AppProvider>
