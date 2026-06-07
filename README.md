@@ -1,6 +1,6 @@
-# Job Portal - Full Stack Application
+# CareerPathEasy AI - Full Stack Application
 
-A modern job portal application built with React and Node.js. Browse jobs, apply for positions, and manage your career seamlessly.
+A modern job portal application built with React and Node.js. Browse jobs, apply for positions, and manage your career seamlessly with AI assistance.
 
 **Live Demo:** [https://job-portal-tau-sepia.vercel.app](https://job-portal-tau-sepia.vercel.app)
 
@@ -81,8 +81,8 @@ A modern job portal application built with React and Node.js. Browse jobs, apply
 
 ### Clone Repository
 ```bash
-git clone https://github.com/dev-chandan-pandey/Job-Portal.git
-cd Job-Portal
+git clone https://github.com/dev-chandan-pandey/CareerPathEasyAi.git
+cd CareerPathEasyAi
 ```
 
 ### Frontend Setup
@@ -151,7 +151,7 @@ CORS_ORIGIN=http://localhost:5173
 ## 📦 Project Structure
 
 ```
-Job-Portal/
+CareerPathEasyAi/
 ├── frontend/                  # React frontend application
 │   ├── src/
 │   │   ├── components/       # Reusable React components
@@ -298,7 +298,7 @@ This project is licensed under the ISC License.
 
 ## 📞 Support
 
-For issues and questions, open an issue on the [GitHub repository](https://github.com/dev-chandan-pandey/Job-Portal/issues).
+For issues and questions, open an issue on the [GitHub repository](https://github.com/dev-chandan-pandey/CareerPathEasyAi/issues).
 
 ---
 
